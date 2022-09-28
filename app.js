@@ -28,8 +28,7 @@ app.post("/download", urlencodedParser, function (request, response) {
     }
 
     let json = {
-        name: "Exam",
-        author: "Pavel Gnatenko"
+        name: "ExamText",
         textName: request.body.textName,
     };
 

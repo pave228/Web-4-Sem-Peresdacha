@@ -73,8 +73,12 @@
             flex-grow: 1;
             text-align: center;
         }
-        .highlight{
-            display: none;
+        .tableF {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .favorite{
+            color: red;
         }
         
     </style>
@@ -99,14 +103,13 @@
         </tr> 
         </table>
     </div>
-    <div class="tableC">
-        
-        <table id="table" class="tableC">
+     <div class="tableF"> 
+        <table id="table2" class="tableF">
            <tr >
                 <th>Избранное</th>
         </tr> 
         </table>
-    </div>
+    </div> 
     <footer>
         <p>Гнатенко Павел Евгеньевич, 201-323</p>
     </footer>
@@ -118,12 +121,12 @@
             }
             else if (document.getElementById("text_id").validity.valueMissing) {
                 document.getElementById("text_id").setCustomValidity("Fill out this field")
-                document.getElementById("SendButton").classList.add('highlight');
+                
             }
             else {
                 document.getElementById("text_id").setCustomValidity('');
                 document.getElementById("text_id").classList.add("validityTrue");
-                document.getElementById("SendButton").classList.remove('highlight');
+                
             }
             document.getElementById("text_id").reportValidity();
         }
@@ -140,7 +143,11 @@
             let td = event.target.closest('td');
             if (!td) return;
             if (!table.contains(td)) return;
-            td.classList.add('highlight');
+            document.getElementById("table2").style.display = "block";
+            let table2 = document.getElementById("table2");
+            let row2 = table2.insertRow(-1);
+            let text2 = row2.insertCell(0);
+            text2.innerHTML = document.getElementById("text_id").value;
         }
 
     </script>
