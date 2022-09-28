@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Вариант 3 Гнатенко</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: green;
+            border-color: darkgreen;
+            border-style: solid;
+            padding: 0 15px;
+        }
+
+        footer {
+            left: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+            background-color: green;
+            border-color: darkgreen;
+            border-style: solid;
+        }
+
+        .FormC {
+            background-color: white;
+            width: 250px;
+            height: 100px;
+            margin: auto;
+            margin-top: 5%;
+            text-align: center;
+            border-style: solid;
+            border-color: green;
+            box-shadow: 0 0 5px 2px green;
+        }
+
+        .inputC {
+            border-style: solid;
+            box-shadow: 0 0 5px 1px red;
+        }
+
+        .inputC.validityTrue {
+            border-style: solid;
+            box-shadow: 0 0 5px 1px green;
+        }
+
+        table {
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 300px;
+            height: auto;
+            border-style: solid;
+            border-color: green;
+            box-shadow: 0 0 5px 1px green;
+        }
+        th {
+            width: 300px;
+        }
+        .tableC {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .highlight{
+            display: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Вариант 3</h1>
+    </header>
+    <div class="FormC">
+        <form method="post" action="/download">
+            <label>Введите текст</label><br>
+            <input type="text" name="textName" id="text_id" class="inputC" required /><br><br>
+            <input id="SendButton" type="submit">
+        </form>
+    </div>
+    <div class="tableC">
+        
+        <table id="table" class="tableC">
+           <tr >
+                <th>Список</th>
+        </tr> 
+        </table>
+    </div>
+    <div class="tableC">
+        
+        <table id="table" class="tableC">
+           <tr >
+                <th>Избранное</th>
+        </tr> 
+        </table>
+    </div>
+    <footer>
+        <p>Гнатенко Павел Евгеньевич, 201-323</p>
+    </footer>
+
+    <script>
+        document.getElementById("text_id").onblur = function (e) {
+            if (document.getElementById("text_id").validity.typeMismatch) {
+                document.getElementById("text_id").setCustomValidity("Incorrect type")
+            }
+            else if (document.getElementById("text_id").validity.valueMissing) {
+                document.getElementById("text_id").setCustomValidity("Fill out this field")
+                document.getElementById("SendButton").classList.add('highlight');
+            }
+            else {
+                document.getElementById("text_id").setCustomValidity('');
+                document.getElementById("text_id").classList.add("validityTrue");
+                document.getElementById("SendButton").classList.remove('highlight');
+            }
+            document.getElementById("text_id").reportValidity();
+        }
+
+        document.getElementById("SendButton").onclick = function (e) {
+            document.getElementById("table").style.display = "block";
+
+            let table = document.getElementById("table");
+            let row = table.insertRow(-1);
+            let text = row.insertCell(0);
+            text.innerHTML = document.getElementById("text_id").value;
+        }
+        table.onclick = function(e) {
+            let td = event.target.closest('td');
+            if (!td) return;
+            if (!table.contains(td)) return;
+            td.classList.add('highlight');
+        }
+
+    </script>
+</body>
+
+</html>
